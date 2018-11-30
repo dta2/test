@@ -10,9 +10,16 @@
 
 	<br><br>
 
-	<?php 
-		echo "ça fonctionne";
-	 ?>
+
+<?php
+$text = file_get_contents("data.txt");
+echo $text;
+?>
+
+
+<br><br><br><br>
+
+<img src="img/thermometer.jpg">
 
 </body>
 </html>
