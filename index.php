@@ -1,25 +1,51 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
-</head>
-<body>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- <link href="main.css" rel="stylesheet"> -->
+    <title>Température</title>
+  </head>
+  <body>
+    <h1>Température</h1>
 
-	<h1>Température</h1>
+    <?php
 
-	<br><br>
+$filename = "data.json";
+$data_json = file_get_contents($json_url);
+$data = json_decode($data_json);
+$data_update = filemtime($filename);
+$bargraph_height = 191 + $data->temperature  * 4 ;
+$bargraph_top = 315 - $data->temperature *  4 ;
 
 
-<?php
-$text = file_get_contents("data.txt");
-echo $text;
-?>
+    $datMod = 'data.json';
+      if (file_exists($datMod)) {
+        echo "$datMod a été modifié le : " . date("d-m-Y H:i:s.", filectime($datMod));
+      }
 
+     ?>
+     <p> il fait <?php  echo $data->temperature;  ?> °C avec <?php  echo $data->humidite;  ?>% d'humidité. Le 30/11/2018</p>
+ <div id="thermometer"  style="height: <?php  echo $data->bargraph_height;  ?>px;  top : <?php  echo $data->bargraph_top;  ?>px;">
+  <div id="bargraph"></div>
+</div>
 
-<br><br><br><br>
+<style>
+  #thermometer {
+  display: block;
+  width: 100px;
+  height: 600px;
+  background-image: url("img/thermometer.jpg");
+}
 
-<img src="img/thermometer.jpg">
-
-</body>
+#bargraph {
+  display: block;
+  position: relative;
+  height: 161px;
+  width: 9px;
+  top: 315px;
+  left: 45px;
+  background-color: red;
+}
+</style>
+  </body>
 </html>
